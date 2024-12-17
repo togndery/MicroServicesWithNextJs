@@ -8,7 +8,7 @@ public class Item :Entity
       
     public DateTime CreatedAt {get; set;}
     
-    public DateTime UpdatedAt {get;}
+    public DateTime UpdatedAt {get;set;}
 
     public DateTime AuctionEnd{get; set;}
 
