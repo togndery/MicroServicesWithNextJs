@@ -22,7 +22,7 @@ public class DbInitialzer
         //chaeck if data exsit in the databse 
 
         var count  = await DB.CountAsync<Item>();
-
+      #region 
         // if(count == 0)
         // {
         //     Console.WriteLine("no data to Seed ");
@@ -34,6 +34,7 @@ public class DbInitialzer
 
         //     await DB.SaveAsync(item);
         // }
+        #endregion
 
 
         using var scop = app.Services.CreateScope();
