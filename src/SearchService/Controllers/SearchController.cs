@@ -16,6 +16,7 @@ namespace SearchService.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Item>>>SearchItem([FromQuery]SearchParm searchParms)
         {
+          
            var query  = DB.PagedSearch<Item ,Item>();
           
            
@@ -46,6 +47,8 @@ namespace SearchService.Controllers
            if(!string.IsNullOrEmpty(searchParms.Winner)){
             query.Match(x =>x.Winner ==searchParms.Winner);
            }
+
+         
 
            query.PageNumber(searchParms.PageNumber);
            query.PageSize(searchParms.PageSize);

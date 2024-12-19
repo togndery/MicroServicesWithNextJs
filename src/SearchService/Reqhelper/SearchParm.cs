@@ -7,7 +7,10 @@ namespace SearchService.Reqhelper
 {
     public class SearchParm
     {
-        public string SearchTerm {get;set;} 
+
+
+       
+       public string SearchTerm {get;set;} 
 
         public int PageNumber {get;set;} =1;
 
