@@ -24,6 +24,8 @@ namespace SearchService.Consumers
            Console.WriteLine("-----> Consuming action created: " + context.Message.Id );
            var item = _mapper.Map<Item>(context.Message);
 
+           if(item.Model == "Foo") throw new ArgumentException("Car witn Name Foo is in valid");
+
            await item.SaveAsync();
         }
     }

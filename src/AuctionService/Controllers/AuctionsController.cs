@@ -69,14 +69,18 @@ namespace AuctionService.Controllers
             auction.Seller = "test";
             
 
-           await _context.Auctions.AddAsync(auction); 
+            await _context.Auctions.AddAsync(auction); 
+  
+             var newAuction = _autoMapper.Map<AuctionDto>(auction);
+
+            await _publishEndpoint.Publish(_autoMapper.Map<AuctionCreated>(newAuction));
+
+
             var result = await _context.SaveChangesAsync()> 0;
 
             if(!result) return BadRequest("Could not save change");
             
-            var newAuction = _autoMapper.Map<AuctionDto>(auction);
-
-            await _publishEndpoint.Publish(_autoMapper.Map<AuctionCreated>(newAuction));
+           
 
           //return (_autoMapper.Map<AuctionDto>(auction));
             return CreatedAtRoute(nameof(GetActionByIdAsync),new {id= auction.Id},_autoMapper.Map<AuctionDto>(auction));
@@ -101,6 +105,9 @@ namespace AuctionService.Controllers
            auction.Item.Mileage = updateAuctionDto.Mileage ?? auction.Item.Mileage;
            auction.Item.Year = updateAuctionDto.Year ?? auction.Item.Year;
 
+
+           await _publishEndpoint.Publish(_autoMapper.Map<AuctionUpdate>(auction));
+
            var result = await _context.SaveChangesAsync() > 0;
 
            if(result) return Ok();
@@ -116,8 +123,13 @@ namespace AuctionService.Controllers
 
           if(auction==null) return NotFound();
 
+           
+
           //TODO check if seller  == username
           _context.Auctions.Remove(auction);
+
+
+          await _publishEndpoint.Publish<AuctionDeleted>(new {id =auction.Id.ToString() });
           
           var result = await _context.SaveChangesAsync() > 0;
 
