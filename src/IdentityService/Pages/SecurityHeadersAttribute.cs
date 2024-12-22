@@ -19,7 +19,7 @@ public sealed class SecurityHeadersAttribute : ActionFilterAttribute
             if (!context.HttpContext.Response.Headers.ContainsKey("X-Content-Type-Options"))
             {
                 context.HttpContext.Response.Headers.Append("X-Content-Type-Options", "nosniff");
-                 context.HttpContext.Response.Headers.Append("X-Content-Type-Options", "self");
+               //  context.HttpContext.Response.Headers.Append("X-Content-Type-Options", "self");
             }
 
             // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options

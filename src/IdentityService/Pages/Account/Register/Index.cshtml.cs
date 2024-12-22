@@ -35,12 +35,12 @@ namespace IdentityService.Pages.Account.Register
         }
 
 
-        public async Task<IActionResult> OnPost(RegisterViewModel model)
+        public async Task<IActionResult> OnPost()
         {
-           if(InputModel.Button !="register")
-           {
-             return Redirect("~/");
-           }
+          //  if(InputModel.Button !="register")
+          //  {
+          //    return Redirect("~/");
+          //  }
            if(ModelState.IsValid)
            {  
               var user = new ApplicationUser
@@ -52,7 +52,7 @@ namespace IdentityService.Pages.Account.Register
               } ;
 
               var result = await _userManager.CreateAsync(user,InputModel.Password);
-
+               
               if(result.Succeeded)
               {
                 await _userManager.AddClaimsAsync(user, new Claim[]{

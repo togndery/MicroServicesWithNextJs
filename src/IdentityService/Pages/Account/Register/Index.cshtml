@@ -2,6 +2,7 @@
 @model IdentityService.Pages.Account.Register.Index
 @{
 }
+
 <div>
         <partial name="_ValidationSummary" />
 </div>
@@ -13,12 +14,13 @@
                 <h2>Regitser</h2>
             </div>
             <div class="card-body">
+    using IdentityService.Pages.Account.Register;
                 <form asp-page="/Account/Register/Index">
                             <input type="hidden" asp-for="InputModel.ReturnUrl" />
 
                             <div class="form-group">
                                 <label asp-for="InputModel.Username"></label>
-                                <input class="form-control" placeholder="Username" asp-for="InputModel.Username" autofocus>
+                                <input class="form-control" placeholder="Username"  asp-for="InputModel.Username" autofocus>
                             </div>
 
 
@@ -41,9 +43,10 @@
                            
                             
                              <a class="pb-3 d-block" asp-page="/Account/Login/Index" asp-route-returnUrl="@Model.InputModel.ReturnUrl">Have Account ? Login</a>
-                            <button class="btn btn-primary" name="Input.Button" value="Register">Register</button>
+                            <button class="btn btn-primary" name="Input.Button" value="register">Register</button>
                             <button class="btn btn-secondary" name="Input.Button" value="cancel">Cancel</button>
                         </form>
+         
             </div>
 
             @if(Model.RegisterSuccess)
@@ -52,6 +55,7 @@
                     <strong>Successfully registered</strong> - you can Login now
                  </div>
             }
+            
         </div>
     </div>
 </div>
