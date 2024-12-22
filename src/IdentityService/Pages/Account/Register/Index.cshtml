@@ -1,5 +1,5 @@
 ﻿@page
-@model IdentityService.Pages.Account.Register.IndexModel
+@model IdentityService.Pages.Account.Register.Index
 @{
 }
 <div>
@@ -13,8 +13,45 @@
                 <h2>Regitser</h2>
             </div>
             <div class="card-body">
-                Form go here
+                <form asp-page="/Account/Register/Index">
+                            <input type="hidden" asp-for="InputModel.ReturnUrl" />
+
+                            <div class="form-group">
+                                <label asp-for="InputModel.Username"></label>
+                                <input class="form-control" placeholder="Username" asp-for="InputModel.Username" autofocus>
+                            </div>
+
+
+                              <div class="form-group">
+                                <label asp-for="InputModel.Email"></label>
+                                <input class="form-control" placeholder="Email address" asp-for="InputModel.Email" >
+                            </div>
+
+
+                              <div class="form-group">
+                                <label asp-for="InputModel.FullName"></label>
+                                <input class="form-control" placeholder="Full Name" asp-for="InputModel.FullName">
+                            </div>
+
+                              <div class="form-group">
+                                <label asp-for="InputModel.Password"></label>
+                                <input type="password" class="form-control" placeholder="Password" asp-for="InputModel.Password" autocomplete="off">
+                            </div>
+                            
+                           
+                            
+                             <a class="pb-3 d-block" asp-page="/Account/Login/Index" asp-route-returnUrl="@Model.InputModel.ReturnUrl">Have Account ? Login</a>
+                            <button class="btn btn-primary" name="Input.Button" value="Register">Register</button>
+                            <button class="btn btn-secondary" name="Input.Button" value="cancel">Cancel</button>
+                        </form>
             </div>
+
+            @if(Model.RegisterSuccess)
+            {
+                 <div class="alert alert-success mt-2">
+                    <strong>Successfully registered</strong> - you can Login now
+                 </div>
+            }
         </div>
     </div>
 </div>
